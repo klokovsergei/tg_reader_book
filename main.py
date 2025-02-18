@@ -6,6 +6,7 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 
 from config_data.config import Config, load_config
+from handlers import user_handlers, other_handlers
 
 
 logger = logging.getLogger(__name__)
@@ -26,8 +27,14 @@ async def main():
     )
     dp = Dispatcher()
 
+    dp.include_router(user_handlers.router)
+    dp.include_router(other_handlers.router)
+
     logger.info('Обнуляем очередь апдейтов')
     await bot.delete_webhook(drop_pending_updates=True)
 
     logger.info('Запускаем polling')
     await dp.start_polling(bot)
+
+
+asyncio.run(main())
