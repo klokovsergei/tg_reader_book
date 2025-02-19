@@ -1,16 +1,12 @@
 import os
 import sys
 import re
-import time
 
-from aiohttp.web_fileresponse import content_type
-
-# BOOK_PATH = 'book/Goncharov-Oblomov.txt'
-# PAGE_SIZE = 1050
-BOOK_PATH = 'Goncharov-Oblomov.txt'
-PAGE_SIZE = 100
+BOOK_PATH = 'book/Goncharov-Oblomov.txt'
+PAGE_SIZE = 1050
 
 book: dict[int, str] = {}
+
 
 # Функуция, возвращающая строку с текстом страницы и ее размер
 def _get_part_text(text: str, start: int, size: int) -> tuple[str, int]:
@@ -26,6 +22,7 @@ def _get_part_text(text: str, start: int, size: int) -> tuple[str, int]:
     text_for_prepare = text_for_prepare[:matches[-1] + 1]
     return text_for_prepare, len(text_for_prepare)
 
+
 # Функция, формирующая словарь книги
 def prepare_book(path: str) -> None:
     with open(path, 'r', encoding='utf-8') as file:
@@ -40,6 +37,7 @@ def prepare_book(path: str) -> None:
 
             position_in_text += next_block[1]
             count_page += 1
+
 
 # Вызов функции prepare_book для подготовки книги из тестового файла
 prepare_book(os.path.join(sys.path[0], os.path.normpath(BOOK_PATH)))
