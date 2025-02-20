@@ -3,7 +3,7 @@ import sys
 import re
 
 BOOK_PATH = 'book/Goncharov-Oblomov.txt'
-PAGE_SIZE = 1050
+PAGE_SIZE = 1000
 
 book: dict[int, str] = {}
 
@@ -23,11 +23,16 @@ def _get_part_text(text: str, start: int, size: int) -> tuple[str, int]:
     return text_for_prepare, len(text_for_prepare)
 
 
+# Удаление их текста 2+ переносов строк, чтобы книга не вытягивалась по высоте
+def _normalize_newline(text: str) -> str:
+    return re.sub(r'\n{2,}', '\n\n', text)
+
+
 # Функция, формирующая словарь книги
 def prepare_book(path: str) -> None:
     with open(path, 'r', encoding='utf-8') as file:
         content = file.read()
-
+        content = _normalize_newline(content)
         size_text = len(content)
         position_in_text, count_page = 0, 1
 
