@@ -27,7 +27,10 @@ LEXICON: dict[str, str] = {
                 'закладки, просто нажмите на её номер во время чтения.\n\n'
                 '▶️ /continue — продолжить чтение',
     'cancel_text': '/continue - продолжить чтение',
-    'unknown_message': '❌ Извините, я не знаю такой команды'
+    'unknown_message': '❌ Извините, я не знаю такой команды',
+    'last_page': 'Это последняя страница',
+    'first_page': 'Это первая страница',
+    'add_bookmark': '✅ Закладка сохранена'
 }
 
 LEXICON_COMMANDS: dict[str, str] = {
